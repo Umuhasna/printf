@@ -37,6 +37,11 @@ int _printf(const char *format, ...)
 					putchar('%');
 					count += 1;
 				}
+				else
+				{
+					putchar(*(format + 1));
+					count++;
+				}
 			}
 			else
 			{
