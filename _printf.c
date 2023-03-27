@@ -1,37 +1,89 @@
-#include <stdio.h>
-#include <stdarg.h>
+#include "main.h"
 
-int _printf(const char *format, ...) {
-	int count = 0;
-	
-	va_list args;
-	va_start(args, format);
+int print_str(char *str);
 
-	while (*format) {
-		if (*format == '%') {
-			format++;
-			if (*format == 'c') {
-				int c = va_arg(args, int);
-				:putchar(c);
-                count++;
-            } else if (*format == 's') {
-                char *s = va_arg(args, char *);
-                while (*s) {
-                    putchar(*s);
-                    s++;
-                    count++;
-                }
-            } else if (*format == '%') {
-                putchar('%');
-                count++;
-            }
-        } else {
-            putchar(*format);
-            count++;
-        }
-        format++;
-    }
+/**
+ * _printf - produces output according to a format
+ * @format: character string
+ *
+ * Return: number of characters printed
+ */
+int _printf(const char *format, ...)
+{
+	char *str;
+	unsigned long int i, count = 0;
+	va_list list;
 
-    va_end(args);
-    return count;
+	va_start(list, format);
+	if (format)
+	{
+		for (i = 0; i < strlen(format); i++)
+		{
+			if (format[i] == '%')
+			{
+				i++;
+				if (format[i] == 'c')
+				{
+					putchar(va_arg(list, int));
+					count += 1;
+				}
+				else if (format[i] == 's')
+				{
+					str = va_arg(list, char *);
+					count += print_str(str);
+				}
+				else if (format[i] == '%')
+				{
+					putchar('%');
+					count += 1;
+				}
+				else
+				{
+					putchar(*(format + 1));
+					count++;
+				}
+			}
+			else
+			{
+				putchar(format[i]);
+				count += 1;
+			}
+		}
+		va_end(list);
+	}
+	else
+		return (-1);
+
+	return (count);
+}
+
+/**
+ * print_str - print the string
+ * @str: string to be printed
+ *
+ * Return: number of characters printed
+ */
+int print_str(char *str)
+{
+	unsigned long int j, count = 0;
+
+	if (str)
+	{
+		for (j = 0; j < strlen(str); j++)
+		{
+			putchar(str[j]);
+			count += 1;
+		}
+	}
+	else
+	{
+		str = "(null)";
+		for (j = 0; j < strlen(str); j++)
+		{
+			putchar(str[j]);
+			count += 1;
+		}
+	}
+
+	return (count);
 }
