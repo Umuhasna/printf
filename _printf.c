@@ -38,9 +38,17 @@ int _printf(const char *format, ...)
 					count += 1;
 				}
 				else if (format[i] == 'd' || format[i] == 'i')
-				{
 					count += printf("%d", va_arg(list, int));
-				}
+				else if (format[i] == 'u')
+					count += printf("%u", va_arg(list, int));
+				else if (format[i] == 'o')
+					count += printf("%o", va_arg(list, int));
+				else if (format[i] == 'x')
+					count += printf("%x", va_arg(list, int));
+				else if (format[i] == 'X')
+					count += printf("%X", va_arg(list, int));
+				else if (format[i] == 'p')
+					count += printf("%p", va_arg(list, void *));
 				else if (format[i] == '\0')
 					return (-1);
 
