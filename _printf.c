@@ -37,7 +37,11 @@ int _printf(const char *format, ...)
 					putchar('%');
 					count += 1;
 				}
-				else if (format[i + 1] == '\0')
+				else if (format[i] == 'd' || format[i] == 'i')
+				{
+					count += printf("%d", va_arg(list, int));
+				}
+				else if (format[i] == '\0')
 					return (-1);
 
 				else
