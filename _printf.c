@@ -37,6 +37,9 @@ int _printf(const char *format, ...)
 					putchar('%');
 					count += 1;
 				}
+				else if (*format++)
+					return (-1);
+
 				else
 				{
 					putchar(format[i - 1]);
