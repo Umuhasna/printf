@@ -10,6 +10,9 @@ int print_str(char *str);
  */
 int _printf(const char *format, ...)
 {
+	if (!format)
+		return (-1);
+
 	char *str;
 	unsigned long int i, count = 0;
 	va_list list;
