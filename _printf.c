@@ -1,24 +1,26 @@
 #include "main.h"
 
-int print_str(char *str);
+void print_buffer(char buffer[], int *buff_ind);
 
 /**
- * _printf - produces output according to a format
- * @format: character string
- *
- * Return: number of characters printed
+ * _printf - Printf function
+ * @format: format.
+ * Return: Printed chars.
  */
 int _printf(const char *format, ...)
 {
-	char *str;
-	unsigned long int i, count = 0;
+	int i, printed = 0, printed_chars = 0;
+	int flags, width, precision, size, buff_ind = 0;
 	va_list list;
+	char buffer[BUFF_SIZE];
+
+	if (format == NULL)
+		return (-1);
 
 	va_start(list, format);
-	if (format)
+
+	for (i = 0; i < strlen(format); i++)
 	{
-		for (i = 0; i < strlen(format); i++)
-		{
 			if (format[i] == '%')
 			{
 				i++;
@@ -53,41 +55,8 @@ int _printf(const char *format, ...)
 				count += 1;
 			}
 		}
-		va_end(list);
-	}
-	else
-		return (-1);
-
-	return (count);
-}
-
-/**
- * print_str - print the string
- * @str: string to be printed
- *
- * Return: number of characters printed
- */
-int print_str(char *str)
-{
-	unsigned long int j, count = 0;
-
-	if (str)
-	{
-		for (j = 0; j < strlen(str); j++)
-		{
-			putchar(str[j]);
-			count += 1;
-		}
-	}
-	else
-	{
-		str = "(null)";
-		for (j = 0; j < strlen(str); j++)
-		{
-			putchar(str[j]);
-			count += 1;
-		}
 	}
 
-	return (count);
+	va_end(list);
+
 }
