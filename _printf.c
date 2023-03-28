@@ -1,6 +1,7 @@
 #include "main.h"
 
 int print_str(char *str);
+int handle_S(char *str);
 
 /**
  * _printf - produces output according to a format
@@ -49,6 +50,11 @@ int _printf(const char *format, ...)
 					count += printf("%X", va_arg(list, int));
 				else if (format[i] == 'p')
 					count += printf("%p", va_arg(list, void *));
+				else if (format[i] == 'S')
+				{
+					str = va_arg(list, char *);
+					count += handle_S(str);
+				}
 				else if (format[i] == '\0')
 					return (-1);
 
@@ -97,6 +103,32 @@ int print_str(char *str)
 		for (j = 0; j < strlen(str); j++)
 		{
 			putchar(str[j]);
+			count += 1;
+		}
+	}
+
+	return (count);
+}
+
+int handle_S(char *str)
+{
+	int i, count = 0;
+
+	if (str == NULL)
+		return (-1);
+
+	for (i = 0; str[i] != '\0'; i++)
+	{
+		if ((str[i] > 0 && str[i] < 32) || str[i] >= 127)
+		{
+			putchar('\\');
+			putchar('x');
+			count += 1;
+			count += printf("0%X", str[i]);
+		}
+		else
+		{
+			putchar(str[i]);
 			count += 1;
 		}
 	}
