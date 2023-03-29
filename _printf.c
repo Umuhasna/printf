@@ -110,6 +110,12 @@ int print_str(char *str)
 	return (count);
 }
 
+/**
+ * handle_S - prints the string
+ * @str: string to be printed
+ *
+ * Return: number of characters printed
+ */
 int handle_S(char *str)
 {
 	int i, count = 0;
@@ -123,8 +129,8 @@ int handle_S(char *str)
 		{
 			putchar('\\');
 			putchar('x');
-			count += 1;
-			count += printf("0%X", str[i]);
+			count += 2;
+			count += printf("%02X", str[i]);
 		}
 		else
 		{
