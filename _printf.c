@@ -3,6 +3,7 @@
 int print_str(char *str);
 int handle_S(char *str);
 
+
 /**
  * _printf - produces output according to a format
  * @format: character string
@@ -37,6 +38,20 @@ int _printf(const char *format, ...)
 				{
 					putchar('%');
 					count += 1;
+				}
+				else if (format[i] == 'b')
+				{
+					unsigned int n = va_arg(args, unsigned int);
+					int i;
+
+					for (i = 31; i >= 0; i--)
+					{
+						unsigned int k;
+
+						k = n >> i;
+						putchar((k & 1) ? '1' : '0');
+					}
+
 				}
 				else if (format[i] == 'd' || format[i] == 'i')
 					count += printf("%d", va_arg(list, int));
