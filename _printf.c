@@ -1,5 +1,5 @@
 #include "main.h"
-
+int print_rev(char *s);
 int print_str(char *str);
 int handle_S(char *str);
 
@@ -54,6 +54,11 @@ int _printf(const char *format, ...)
 				{
 					str = va_arg(list, char *);
 					count += handle_S(str);
+				}
+				else if(format[i] == 'r')
+				{
+					str = va_arg(list, char *);
+					count += print_rev(str);
 				}
 				else if (format[i] == '\0')
 					return (-1);
@@ -140,4 +145,32 @@ int handle_S(char *str)
 	}
 
 	return (count);
+}
+
+/**
+ * print_rev - prints a string, in reverse
+ * @s: the string
+ *
+ * Return: void
+ */
+int print_rev(char *s)
+{
+        int i, count = 0;
+
+	if (str)
+	{
+        	i = 0;
+        	while (s[i] != '\0')
+        	{
+                	i++;
+        	}
+        	i--;
+        	while (i >= 0)
+        	{
+                	putchar(s[i]);
+			count += 1;
+                	i--;
+        	}
+	}
+        return (count);
 }
