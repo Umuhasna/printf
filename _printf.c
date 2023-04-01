@@ -183,7 +183,7 @@ int print_rev(char *s)
 {
         int i, count = 0;
 
-	if (str)
+	if (s)
 	{
         	i = 0;
         	while (s[i] != '\0')
